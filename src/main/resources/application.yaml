@@ -1,0 +1,6 @@
+ktor:
+    application:
+        modules:
+            - ru.topbun.ApplicationKt.module
+    deployment:
+        port: 80
