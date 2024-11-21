@@ -1,17 +1,16 @@
-package ru.topbun.network
+package ru.topbun.network.api
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.http.*
 import ru.topbun.models.config.Config
 import ru.topbun.models.tours.HottourResponse
-import ru.topbun.utills.Env
+import ru.topbun.network.ApiFactory
 
 class ToursApi(
     private val client: ApiFactory = ApiFactory
 ) {
 
-    suspend fun getTours(config: Config) = client.toursClient.post("/xml/hottours.php"){
+    suspend fun getTours(config: Config) = ApiFactory.toursClient.post("/xml/hottours.php"){
         url {
             parameters.append("city", config.city.toString())
             parameters.append("maxDays", config.maxDays.toString())

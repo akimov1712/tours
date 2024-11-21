@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import ru.topbun.models.meals.Meals
 import ru.topbun.models.tours.Tours
 import ru.topbun.utills.Env
 
@@ -16,7 +17,7 @@ fun Application.configureDatabases() {
         password = Env["DB_PASSWORD"],
     )
     transaction {
-        SchemaUtils.create(Tours)
+        SchemaUtils.create(Tours, Meals)
     }
 
 }

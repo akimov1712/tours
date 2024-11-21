@@ -3,6 +3,7 @@ package ru.topbun.models.config
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import ru.topbun.features.tours.TourScheduler
 import java.io.File
 
 @Serializable
@@ -17,11 +18,14 @@ data class Config(
     val stars: Int?,
     val rating: Int?,
     val meal: Int?,
+    val delayUniquePosts: Int,
+    val delayPostingMinutes: Int,
 ){
 
     fun saveConfig(){
         val configText = Json.encodeToString(this)
         File("src/main/resources/config.json").writeText(configText)
+        TourScheduler.updateInterval(this.delayPostingMinutes)
     }
 
     companion object{

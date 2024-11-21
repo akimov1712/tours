@@ -34,10 +34,21 @@ object ApiFactory {
         defaultRequest {
             url("http://tourvisor.ru")
             url {
-                parameters.append("items", "1000")
+                parameters.append("items", "100")
                 parameters.append("format", "json")
                 parameters.append("authlogin", Env["API_LOGIN"])
                 parameters.append("authpass", Env["API_PASSWORD"])
+            }
+        }
+    }
+
+    val vkClient = client.config {
+        defaultRequest {
+            url("https://api.vk.com")
+            url {
+                parameters.append("access_token", Env["VK_BOT_KEY"])
+                parameters.append("v", "5.199")
+                parameters.append("owner_id", Env["VK_BOT_KEY"])
             }
         }
     }

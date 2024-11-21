@@ -1,7 +1,8 @@
-package ru.topbun.network
+package ru.topbun.network.api
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import ru.topbun.network.ApiFactory
 import ru.topbun.utills.Env
 
 class TelegramApi(
@@ -13,16 +14,16 @@ class TelegramApi(
         println("HTTP LOG: ${response.body<String>()}")
     }
 
-    suspend fun sendMessage(text: String, chatId: String) = ApiFactory.telegramClient.post("/bot${Env["BOT_KEY"]}/sendMessage"){
+    suspend fun sendMessage(text: String, chatId: String) = ApiFactory.telegramClient.post("/bot${Env["TG_BOT_KEY"]}/sendMessage"){
         url{
-            parameters.append("chat_id", chatId)
+            parameters.append("TG_CHAT_ID", chatId)
             parameters.append("text", text)
             parameters.append("parse_mode", "HTML")
         }
     }
 
-    private suspend fun sendPhoto(photoUrl: String, text: String, chatId: String) = ApiFactory.telegramClient.post("/bot${Env["BOT_KEY"]}/sendPhoto") {
-        parameter("chat_id", chatId)
+    private suspend fun sendPhoto(photoUrl: String, text: String, chatId: String) = ApiFactory.telegramClient.post("/bot${Env["TG_BOT_KEY"]}/sendPhoto") {
+        parameter("TG_CHAT_ID", chatId)
         parameter("photo", photoUrl)
         parameter("caption", text)
         parameter("parse_mode", "HTML")
