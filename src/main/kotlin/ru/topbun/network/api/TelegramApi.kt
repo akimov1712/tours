@@ -10,23 +10,24 @@ class TelegramApi(
 ) {
 
     suspend fun sendMessageWithPhoto(text: String, photoUrl: String?, chatId: String){
-        val response = if (photoUrl.isNullOrEmpty()) sendMessage(text, chatId) else sendPhoto(photoUrl, text, chatId)
-        println("HTTP LOG: ${response.body<String>()}")
+        if (photoUrl.isNullOrEmpty()) sendMessage(text, chatId) else sendPhoto(photoUrl, text, chatId)
     }
 
-    suspend fun sendMessage(text: String, chatId: String) = ApiFactory.telegramClient.post("/bot${Env["TG_BOT_KEY"]}/sendMessage"){
+    suspend fun sendMessage(text: String, chatId: String) = client.telegramClient.post("/bot${Env["TG_BOT_KEY"]}/sendMessage"){
         url{
-            parameters.append("TG_CHAT_ID", chatId)
+            parameters.append("chat_id", chatId)
             parameters.append("text", text)
             parameters.append("parse_mode", "HTML")
         }
     }
 
-    private suspend fun sendPhoto(photoUrl: String, text: String, chatId: String) = ApiFactory.telegramClient.post("/bot${Env["TG_BOT_KEY"]}/sendPhoto") {
-        parameter("TG_CHAT_ID", chatId)
-        parameter("photo", photoUrl)
-        parameter("caption", text)
-        parameter("parse_mode", "HTML")
+    private suspend fun sendPhoto(photoUrl: String, text: String, chatId: String) = client.telegramClient.post("/bot${Env["TG_BOT_KEY"]}/sendPhoto") {
+        url {
+            parameters.append("chat_id", chatId)
+            parameters.append("photo", photoUrl)
+            parameters.append("caption", text)
+            parameters.append("parse_mode", "HTML")
+        }
     }
 
 }

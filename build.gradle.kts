@@ -15,7 +15,7 @@ java {
 }
 ktor {
     fatJar {
-        archiveFileName.set("tastyAPI.jar")
+        archiveFileName.set("toursAPI.jar")
     }
 }
 

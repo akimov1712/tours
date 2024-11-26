@@ -3,4 +3,4 @@ ktor:
         modules:
             - ru.topbun.ApplicationKt.module
     deployment:
-        port: 80
+        port: 8080

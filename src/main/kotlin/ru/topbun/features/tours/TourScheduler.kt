@@ -8,6 +8,7 @@ import ru.topbun.models.tours.Tours
 import ru.topbun.models.tours.Tours.clearTours
 import ru.topbun.network.api.TelegramApi
 import ru.topbun.network.api.ToursApi
+import ru.topbun.network.api.VkApi
 import ru.topbun.utills.*
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -32,6 +33,7 @@ object TourScheduler {
                 runCatching {
                     executeTask()
                 }.onFailure { e ->
+                    e.printStackTrace()
                     println("Error occurred: ${e.message}")
                 }
                 delay(intervalMinutes.toDuration(DurationUnit.MINUTES).inWholeMilliseconds)
@@ -45,16 +47,19 @@ object TourScheduler {
 
     private suspend fun executeTask() {
         val toursApi = ToursApi()
-        val response = toursApi.getTours(Config.getConfigFromResource())
+        val config = Config.getConfigFromResource()
+        val response = toursApi.getTours(config)
         val organizedTours = response.organizedTours()
         val filteredTours = organizedTours.getFilteredTours().takeIf { it.isNotEmpty() } ?: run {
             clearTours()
             organizedTours.getFilteredTours()
         }
         filteredTours.firstOrNull()?.let { tours ->
-            val message = tours.buildMessageToPost()
+            val tgMessage = tours.buildMessageToTelegramPost()
+            val vkMessage = tours.buildMessageToVkPost()
             val imageLink = tours.getPreviewImage().buildImageLink()
-            TelegramApi().sendMessageWithPhoto(message, imageLink, Env["TG_CHAT_ID"])
+            TelegramApi().sendMessageWithPhoto(tgMessage, imageLink, Env["TG_CHAT_ID"])
+            VkApi().sendMessageWithPhoto(vkMessage, imageLink, Env["VK_CHAT_ID"])
             Tours.insertTourList(tours)
         }
     }
