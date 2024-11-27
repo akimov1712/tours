@@ -44,7 +44,7 @@ fun List<TourDTO>.buildMessageToTelegramPost(config: Config): String{
             }
         }
     }
-    this.forEach {
+    this.take(15).forEach {
         val msg = "\uD83C\uDFE8 ${it.hotelname} (${it.hotelstars} ⭐) - ".capitalizeWords()
         val price = "<a href=\"${config.domain}/podbor-tura#tvtourid=${it.tourid}\">${formatPrice(it.price)} Руб</a>\n"
         hotels.append(msg + price)
