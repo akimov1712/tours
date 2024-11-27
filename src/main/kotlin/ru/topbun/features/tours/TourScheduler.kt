@@ -13,8 +13,8 @@ import ru.topbun.utills.*
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-object TourScheduler {
-    private val intervalFlow = MutableStateFlow(getIntervalFromConfig())
+class TourScheduler(private val config: Config) {
+    private val intervalFlow = MutableStateFlow(config.delayPostingMinutes)
     private var timerJob: Job? = null
 
     fun start() {
@@ -41,13 +41,12 @@ object TourScheduler {
         }
     }
 
-    fun updateInterval(newIntervalMinutes: Int) {
-        intervalFlow.value = newIntervalMinutes
+    fun cancel() {
+        timerJob?.cancel()
     }
 
     private suspend fun executeTask() {
         val toursApi = ToursApi()
-        val config = Config.getConfigFromResource()
         val response = toursApi.getTours(config)
         val organizedTours = response.organizedTours()
         val filteredTours = organizedTours.getFilteredTours().takeIf { it.isNotEmpty() } ?: run {
@@ -55,16 +54,12 @@ object TourScheduler {
             organizedTours.getFilteredTours()
         }
         filteredTours.firstOrNull()?.let { tours ->
-            val tgMessage = tours.buildMessageToTelegramPost()
-            val vkMessage = tours.buildMessageToVkPost()
+            val tgMessage = tours.buildMessageToTelegramPost(config)
+            val vkMessage = tours.buildMessageToVkPost(config)
             val imageLink = tours.getPreviewImage().buildImageLink()
             TelegramApi().sendMessageWithPhoto(tgMessage, imageLink, Env["TG_CHAT_ID"])
             VkApi().sendMessageWithPhoto(vkMessage, imageLink, Env["VK_CHAT_ID"])
             Tours.insertTourList(tours)
         }
-    }
-
-    private fun getIntervalFromConfig(): Int {
-        return Config.getConfigFromResource().delayPostingMinutes
     }
 }

@@ -8,7 +8,12 @@ import ru.topbun.models.tours.Tours
 
 
 fun List<List<TourDTO>>.getFilteredTours(): List<List<TourDTO>> =
-    filter { group -> group.none { Tours.haveSuspension(it.tourid) } }
+    filter { group ->
+        val delay = Config.getConfigFromResource().first { it.city?.name == group.first().departurename }.delayUniquePosts
+        group.none {
+            Tours.haveSuspension(it.tourid, delay)
+        }
+    }
 
 fun HottourResponse.organizedTours(): List<List<TourDTO>> =
     hottours.tours.groupBy { it.countryname }.values.toList()
@@ -20,13 +25,12 @@ fun List<TourDTO>.getPreviewImage(): String = this.maxBy {
     it.hotelstars
 }.also { println(it) }.hotelpicture
 
-fun List<TourDTO>.buildMessageToTelegramPost(): String{
+fun List<TourDTO>.buildMessageToTelegramPost(config: Config): String{
     val nearTour = this.getNearTour()
     val date = nearTour.flydate.parseDate()
     val hotels = StringBuilder()
     val stocksBuilder = StringBuilder()
     val countryName = if (nearTour.countryname == "Россия") nearTour.hotelregionname else nearTour.countryname
-    val config = Config.getConfigFromResource()
     val operators = this.map { it.operatorname }.distinct()
     if (operators.size == 1){
         config.stocks.firstOrNull { it.operator.name == operators.first() }?.let { stocksBuilder.append("Действует акция – ${it.stock}") }
@@ -59,14 +63,13 @@ ${stocksBuilder.toString()}
         """.trimIndent()
 }
 
-fun List<TourDTO>.buildMessageToVkPost(): String{
+fun List<TourDTO>.buildMessageToVkPost(config: Config): String{
     val nearTour = this.getNearTour()
     val date = nearTour.flydate.parseDate()
     val hotels = StringBuilder()
     val stocksBuilder = StringBuilder()
     val operators = this.map { it.operatorname }.distinct()
     val countryName = if (nearTour.countryname == "Россия") nearTour.hotelregionname else nearTour.countryname
-    val config = Config.getConfigFromResource()
     val stock = config.stocks.firstOrNull { it.operator.name == nearTour.operatorname }
     this.forEach {
         val msg = "\uD83C\uDFE8 ${it.hotelname} (${it.hotelstars} ⭐) - ".capitalizeWords()

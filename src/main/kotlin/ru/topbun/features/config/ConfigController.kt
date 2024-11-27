@@ -12,8 +12,8 @@ class ConfigController(
 ) {
 
     suspend fun saveConfig(){
-        val config = call.receive<Config>()
-        config.saveConfig()
+        val config = call.receive<List<Config>>()
+        Config.saveConfig(config)
         call.respond(HttpStatusCode.OK)
     }
 

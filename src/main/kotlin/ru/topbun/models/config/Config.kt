@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import ru.topbun.features.tours.TourScheduler
+import ru.topbun.features.tours.TourSchedulerManager
 import ru.topbun.models.operatorToStock.OperatorToStock
 import ru.topbun.toursadmin.models.city.City
 import ru.topbun.toursadmin.models.country.Country
@@ -31,17 +32,20 @@ data class Config(
     val stocks: List<OperatorToStock>
 ){
 
-    fun saveConfig(){
-        val configText = Json.encodeToString(this)
-        File("config.json").writeText(configText)
-        TourScheduler.updateInterval(this.delayPostingMinutes)
-    }
-
     companion object{
 
-        fun getConfigFromResource(): Config {
+        fun saveConfig(configs: List<Config>){
+            val oldConfig = getConfigFromResource()
+            val editableConfigs = configs.filter { !oldConfig.contains(it) }
+            val configText = Json.encodeToString(this)
+            File("config.json").writeText(configText)
+            editableConfigs.forEach { TourSchedulerManager.updateConfig(it) }
+
+        }
+
+        fun getConfigFromResource(): List<Config> {
             val file = File("config.json").readText()
-            return Json.decodeFromString<Config>(file)
+            return Json.decodeFromString<List<Config>>(file)
         }
 
     }

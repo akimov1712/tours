@@ -27,9 +27,9 @@ object Tours: IntIdTable() {
 
     fun clearTours() = transaction { Tours.deleteAll() }
 
-    fun haveSuspension(tourId: Long) = transaction {
+    fun haveSuspension(tourId: Long, delayDays: Int) = transaction {
         deleteWhere {
-            date.less(LocalDate.now().minusDays(Config.getConfigFromResource().delayUniquePosts.toLong())
+            date.less(LocalDate.now().minusDays(delayDays.toLong())
                 .toKotlinLocalDate())
         }
         selectAll().where { Tours.tourId eq tourId }.empty().not()
