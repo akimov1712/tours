@@ -24,9 +24,22 @@ fun List<TourDTO>.buildMessageToTelegramPost(): String{
     val nearTour = this.getNearTour()
     val date = nearTour.flydate.parseDate()
     val hotels = StringBuilder()
+    val stocksBuilder = StringBuilder()
     val countryName = if (nearTour.countryname == "Россия") nearTour.hotelregionname else nearTour.countryname
     val config = Config.getConfigFromResource()
-    val stock = config.stocks.firstOrNull { it.operator.name == nearTour.operatorname }
+    val operators = this.map { it.operatorname }.distinct()
+    if (operators.size == 1){
+        config.stocks.firstOrNull { it.operator.name == operators.first() }?.let { stocksBuilder.append("Действует акция – ${it.stock}") }
+    } else {
+        val groupTours = this.groupBy { it.operatorname }
+        groupTours.forEach { tourGroup ->
+            val stockText = config.stocks.firstOrNull { it.operator.name == tourGroup.value.first().operatorname }
+            if (stockText != null){
+                val forHotels = tourGroup.value.map { it.hotelname }.joinToString(", ").capitalizeWords()
+                stocksBuilder.append("Действует акция для <b>$forHotels</b> – ${stockText.stock}\n\n")
+            }
+        }
+    }
     this.forEach {
         val msg = "\uD83C\uDFE8 ${it.hotelname} (${it.hotelstars} ⭐) - ".capitalizeWords()
         val price = "<a href=\"${config.domain}/podbor-tura#tvtourid=${it.tourid}\">${formatPrice(it.price)} Руб</a>\n"
@@ -40,8 +53,7 @@ fun List<TourDTO>.buildMessageToTelegramPost(): String{
 
 <b>Отели и цены:</b>
 $hotels
-
-${stock?.stock}
+${stocksBuilder.toString()}
 
 ⚡️Цена за 1 человека при 2-местном размещении.
         """.trimIndent()
@@ -67,8 +79,7 @@ fun List<TourDTO>.buildMessageToVkPost(): String{
 
 Отели и цены:
 $hotels
-
-${stock?.stock}
+${stock?.let { "\n" + it.stock } ?: ""}
 
 ⚡️Цена за 1 человека при 2-местном размещении.
         """.trimIndent()

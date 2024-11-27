@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.topbun.models.config.Config
 import ru.topbun.models.meals.Meals
@@ -28,5 +29,5 @@ fun Application.module() {
     configureRouting()
     configureSerialization()
     configureDatabases()
-//    configurePosting()
+    configurePosting()
 }
