@@ -11,6 +11,7 @@ fun Application.configureSerialization() {
             Json {
                 ignoreUnknownKeys = true
                 encodeDefaults = true
+                isLenient = true
             }
         )
     }

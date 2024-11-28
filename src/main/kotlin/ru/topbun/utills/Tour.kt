@@ -70,7 +70,9 @@ fun List<TourDTO>.buildMessageToVkPost(config: Config): String{
     val stocksBuilder = StringBuilder()
     val operators = this.map { it.operatorname }.distinct()
     val countryName = if (nearTour.countryname == "Россия") nearTour.hotelregionname else nearTour.countryname
-    val stock = config.stocks.firstOrNull { it.operator.name == nearTour.operatorname }
+    val minNight = this.minBy { it.nights }.nights + 1
+    val maxNight = this.maxBy { it.nights }.nights + 1
+    val durationDays = if (minNight == maxNight) minNight.toString() else "$minNight - $maxNight"
     this.forEach {
         val msg = "\uD83C\uDFE8 ${it.hotelname} (${it.hotelstars} ⭐) - ".capitalizeWords()
         val price = "${formatPrice(it.price)} Руб\n"
@@ -91,7 +93,7 @@ fun List<TourDTO>.buildMessageToVkPost(config: Config): String{
     return """
 🔥 $countryName из ${nearTour.departurenamefrom} ✈️
 
-📅 ${date.formatToDayWithMonth()} на ${nearTour.nights + 1} дней
+📅 ${date.formatToDayWithMonth()} на $durationDays дней
 🍽️ Питание: ${Meals.selectMeal(nearTour.meal).russian}
 
 Отели и цены:

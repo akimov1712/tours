@@ -3,7 +3,6 @@ package ru.topbun.models.config
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import ru.topbun.features.tours.TourScheduler
 import ru.topbun.features.tours.TourSchedulerManager
 import ru.topbun.models.operatorToStock.OperatorToStock
 import ru.topbun.toursadmin.models.city.City
@@ -37,7 +36,7 @@ data class Config(
         fun saveConfig(configs: List<Config>){
             val oldConfig = getConfigFromResource()
             val editableConfigs = configs.filter { !oldConfig.contains(it) }
-            val configText = Json.encodeToString(this)
+            val configText = Json.encodeToString(configs)
             File("config.json").writeText(configText)
             editableConfigs.forEach { TourSchedulerManager.updateConfig(it) }
 

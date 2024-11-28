@@ -4,8 +4,9 @@ import io.ktor.http.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import ru.topbun.features.tours.TourScheduler
+import kotlinx.serialization.json.Json
 import ru.topbun.models.config.Config
+import ru.topbun.models.config.ConfigResponse
 
 class ConfigController(
     private val call: RoutingCall
