@@ -33,8 +33,8 @@ class ToursApi(
                 val value = it.joinToString(",") { it.id }
                 parameters.append("operators", value)
             }
-            config.dateFrom?.let { parameters.append("dateFrom", it) }
-            config.dateTo?.let { parameters.append("dateTo", it) }
+            config.dateFrom?.let { parameters.append("datefrom", it) }
+            config.dateTo?.let { parameters.append("dateto", it) }
             config.stars?.name?.firstOrNull()?.let { parameters.append("stars", it.toString()) }
             config.rating?.let { parameters.append("rating", it.toString()) }
             config.meal?.let { parameters.append("meal", it.id) }
