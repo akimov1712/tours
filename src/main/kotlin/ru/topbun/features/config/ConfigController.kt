@@ -6,7 +6,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 import ru.topbun.models.config.Config
-import ru.topbun.models.config.ConfigResponse
 
 class ConfigController(
     private val call: RoutingCall

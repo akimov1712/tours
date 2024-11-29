@@ -30,13 +30,13 @@ class TourScheduler(private val config: Config) {
         timerJob?.cancel()
         timerJob = CoroutineScope(Dispatchers.IO).launch {
             while (isActive) {
+                delay(intervalMinutes.toDuration(DurationUnit.MINUTES).inWholeMilliseconds)
                 runCatching {
                     executeTask()
                 }.onFailure { e ->
                     e.printStackTrace()
                     println("Error occurred: ${e.message}")
                 }
-                delay(intervalMinutes.toDuration(DurationUnit.MINUTES).inWholeMilliseconds)
             }
         }
     }
