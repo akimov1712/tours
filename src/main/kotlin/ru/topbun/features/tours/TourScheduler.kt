@@ -49,11 +49,8 @@ class TourScheduler(private val config: Config) {
         val toursApi = ToursApi()
         val response = toursApi.getTours(config)
         val organizedTours = response.organizedTours()
-        val filteredTours = organizedTours.getFilteredTours().takeIf { it.isNotEmpty() } ?: run {
-            clearTours()
-            organizedTours.getFilteredTours()
-        }
-        filteredTours.firstOrNull()?.let { tours ->
+        val filteredTours = organizedTours.getFilteredTours().takeIf { it.isNotEmpty() }
+        filteredTours?.firstOrNull()?.let { tours ->
             val tgMessage = tours.buildMessageToTelegramPost(config)
             val vkMessage = tours.buildMessageToVkPost(config)
             val imageLink = tours.getPreviewImage().buildImageLink()
