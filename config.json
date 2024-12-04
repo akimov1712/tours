@@ -1,1 +1,214 @@
-[{"title":"ФанСан РБ","city":{"id":"7","name":"Самара","namefrom":"Самары"},"maxDays":0,"countries":[{"id":"1","name":"Египет"},{"id":"9","name":"ОАЭ"},{"id":"4","name":"Турция"}],"regions":[],"operators":[{"fullname":"FUN&SUN (TUI)","id":"25","name":"FUN&SUN (TUI)","russian":"FUN&SUN (TUI)"}],"dateFrom":"01.01.2024","dateTo":"30.11.2025","stars":null,"rating":4.2,"meal":null,"delayUniquePosts":4,"delayPostingMinutes":0,"domain":"https://tyrmarket.ru","stocks":[{"operator":{"fullname":"FUN&SUN (TUI)","id":"25","name":"FUN&SUN (TUI)","russian":"FUN&SUN (TUI)"},"stock":"Предоплата всего 5000₽. Промокод на 1000₽ fs10"}]},{"title":"coral РБ","city":{"id":"7","name":"Самара","namefrom":"Самары"},"maxDays":0,"countries":[{"id":"1","name":"Египет"},{"id":"9","name":"ОАЭ"},{"id":"4","name":"Турция"}],"regions":[],"operators":[{"fullname":"Coral Travel","id":"11","name":"Coral","russian":"Корал Тревел"}],"dateFrom":"17.12.2024","dateTo":"31.10.2025","stars":null,"rating":4.3,"meal":null,"delayUniquePosts":4,"delayPostingMinutes":0,"domain":"https://tyrmarket.ru","stocks":[{"operator":{"fullname":"Coral Travel","id":"11","name":"Coral","russian":"Корал Тревел"},"stock":"Минус 5000₽ по промокоду  bonus"}]},{"title":"Гор. Москва","city":{"id":"1","name":"Москва","namefrom":"Москвы"},"maxDays":0,"countries":[{"id":"59","name":"Бахрейн"},{"id":"37","name":"Венгрия"},{"id":"90","name":"Венесуэла"},{"id":"16","name":"Вьетнам"},{"id":"3","name":"Индия"},{"id":"7","name":"Индонезия"},{"id":"79","name":"Катар"},{"id":"13","name":"Китай"},{"id":"10","name":"Куба"},{"id":"27","name":"Маврикий"},{"id":"36","name":"Малайзия"},{"id":"8","name":"Мальдивы"},{"id":"28","name":"Сейшелы"}],"regions":[],"operators":[{"fullname":"Ambotis Tours","id":"62","name":"Ambotis","russian":"Амботис"},{"fullname":"Anex Tour","id":"13","name":"Anex","russian":"Анекс Тур"},{"fullname":"Библио-Глобус","id":"18","name":"Biblioglobus","russian":"Библио Глобус"},{"fullname":"Coral Travel","id":"11","name":"Coral","russian":"Корал Тревел"},{"fullname":"FUN&SUN (TUI)","id":"25","name":"FUN&SUN (TUI)","russian":"FUN&SUN (TUI)"},{"fullname":"LOTI","id":"172","name":"LOTI","russian":"LOTI"},{"fullname":"Lets Fly","id":"164","name":"Lets Fly","russian":"Lets Fly"},{"fullname":"Kazunion","id":"89","name":"Kazunion","russian":"Казюнион"},{"fullname":"Pegas Touristik","id":"12","name":"Pegas","russian":"Пегас Туристик"},{"fullname":"Russian Express","id":"23","name":"Russian Express","russian":"Русский Экспресс"},{"fullname":"Resort Holiday","id":"177","name":"Resort Holiday","russian":"Resort Holiday"},{"fullname":"Selfie Travel (KZ)","id":"131","name":"Selfie Travel (KZ)","russian":"Selfie Travel (KZ)"},{"fullname":"Space Travel","id":"66","name":"Space Travel","russian":"Space Travel"},{"fullname":"Spectrum","id":"59","name":"Spectrum","russian":"Спектрум"}],"dateFrom":null,"dateTo":null,"stars":null,"rating":null,"meal":null,"delayUniquePosts":3,"delayPostingMinutes":0,"domain":"https://tyrmarket.ru","stocks":[]}]
+[
+  {
+    "title": "coral РБ",
+    "city": {
+      "id": "7",
+      "name": "Самара",
+      "namefrom": "Самары"
+    },
+    "maxDays": 0,
+    "countries": [
+      {
+        "id": "1",
+        "name": "Египет"
+      },
+      {
+        "id": "9",
+        "name": "ОАЭ"
+      },
+      {
+        "id": "4",
+        "name": "Турция"
+      }
+    ],
+    "regions": [],
+    "operators": [
+      {
+        "fullname": "Coral Travel",
+        "id": "11",
+        "name": "Coral",
+        "russian": "Корал Тревел"
+      }
+    ],
+    "dateFrom": null,
+    "dateTo": null,
+    "stars": null,
+    "rating": 4.0,
+    "meal": {
+      "fullname": "All Inclusive",
+      "id": "7",
+      "name": "AI",
+      "russian": "Все Включено",
+      "russianfull": "AI - Все Включено"
+    },
+    "delayUniquePosts": 4,
+    "delayPostingMinutes": 1,
+    "domain": "https://tyrmarket.ru",
+    "tgId": "@tours_samara",
+    "stocks": [
+      {
+        "operator": {
+          "fullname": "Coral Travel",
+          "id": "11",
+          "name": "Coral",
+          "russian": "Корал Тревел"
+        },
+        "stock": "БРОНИРУЙ СВОЙ ИДЕАЛЬНЫЙ ТУР И ПОЛУЧИ СКИДКУ 5000₽! 🌟\n\n\nЕсли вы мечтаете о незабываемом путешествии, у нас для вас отличные новости! Только сейчас при бронировании тура вы можете получить бонус-скидку 5000₽! 💸 \n\n✨ Как воспользоваться акцией? \n1. Выберите понравившийся тур из нашего списка. \n2. Перейдите в бронирование, кликнув по цене. \n3. Напишите в комментарии в бронировании, если необходимо поменять состав участников (например добавить ребёнка) \n3. Укажите код скидки: TOUR5000 при бронировании в окне промокод. \n\nНе упустите возможность отправиться в увлекательное путешествие по невероятным местам! 🏝️🏔️ \n"
+      }
+    ]
+  },
+  {
+    "title": "самара все",
+    "city": {
+      "id": "7",
+      "name": "Самара",
+      "namefrom": "Самары"
+    },
+    "maxDays": 0,
+    "countries": [
+      {
+        "id": "46",
+        "name": "Абхазия"
+      },
+      {
+        "id": "55",
+        "name": "Азербайджан"
+      },
+      {
+        "id": "16",
+        "name": "Вьетнам"
+      },
+      {
+        "id": "54",
+        "name": "Грузия"
+      },
+      {
+        "id": "13",
+        "name": "Китай"
+      },
+      {
+        "id": "8",
+        "name": "Мальдивы"
+      },
+      {
+        "id": "9",
+        "name": "ОАЭ"
+      },
+      {
+        "id": "47",
+        "name": "Россия"
+      },
+      {
+        "id": "2",
+        "name": "Таиланд"
+      },
+      {
+        "id": "57",
+        "name": "Беларусь"
+      },
+      {
+        "id": "3",
+        "name": "Индия"
+      },
+      {
+        "id": "53",
+        "name": "Армения"
+      },
+      {
+        "id": "1",
+        "name": "Египет"
+      }
+    ],
+    "regions": [],
+    "operators": [
+      {
+        "fullname": "Anex Tour",
+        "id": "13",
+        "name": "Anex",
+        "russian": "Анекс Тур"
+      },
+      {
+        "fullname": "Библио-Глобус",
+        "id": "18",
+        "name": "Biblioglobus",
+        "russian": "Библио Глобус"
+      },
+      {
+        "fullname": "Coral Travel",
+        "id": "11",
+        "name": "Coral",
+        "russian": "Корал Тревел"
+      },
+      {
+        "fullname": "FUN&SUN (TUI)",
+        "id": "25",
+        "name": "FUN&SUN (TUI)",
+        "russian": "FUN&SUN (TUI)"
+      },
+      {
+        "fullname": "Kazunion",
+        "id": "89",
+        "name": "Kazunion",
+        "russian": "Казюнион"
+      },
+      {
+        "fullname": "PAKS",
+        "id": "27",
+        "name": "Paks",
+        "russian": "Пакс"
+      },
+      {
+        "fullname": "Pegas Touristik",
+        "id": "12",
+        "name": "Pegas",
+        "russian": "Пегас Туристик"
+      },
+      {
+        "fullname": "Resort Holiday",
+        "id": "177",
+        "name": "Resort Holiday",
+        "russian": "Resort Holiday"
+      },
+      {
+        "fullname": "Russian Express",
+        "id": "23",
+        "name": "Russian Express",
+        "russian": "Русский Экспресс"
+      },
+      {
+        "fullname": "Selfie Travel (KZ)",
+        "id": "131",
+        "name": "Selfie Travel (KZ)",
+        "russian": "Selfie Travel (KZ)"
+      },
+      {
+        "fullname": "Spectrum",
+        "id": "59",
+        "name": "Spectrum",
+        "russian": "Спектрум"
+      },
+      {
+        "fullname": "Space Travel",
+        "id": "66",
+        "name": "Space Travel",
+        "russian": "Space Travel"
+      }
+    ],
+    "dateFrom": null,
+    "dateTo": null,
+    "stars": null,
+    "rating": 3.0,
+    "meal": {
+      "fullname": "Bed&Breakfast",
+      "id": "3",
+      "name": "BB",
+      "russian": "Завтрак",
+      "russianfull": "BB - Только завтрак"
+    },
+    "delayUniquePosts": 5,
+    "delayPostingMinutes": 1,
+    "domain": "https://tyrmarket.ru",
+    "tgId": "@tours_samara",
+    "stocks": []
+  }
+]

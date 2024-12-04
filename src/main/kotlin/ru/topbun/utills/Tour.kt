@@ -8,9 +8,9 @@ import ru.topbun.models.tours.Tours
 import ru.topbun.models.tours.Tours.date
 
 
-fun List<List<TourDTO>>.getFilteredTours(): List<List<TourDTO>> =
+fun List<List<TourDTO>>.getFilteredTours(config: Config): List<List<TourDTO>> =
     filter { group ->
-        val delay = Config.getConfigFromResource().first { it.city?.name == group.first().departurename }.delayUniquePosts
+        val delay = config.delayUniquePosts
         group.none {
             Tours.haveSuspension(it.tourid, delay)
         }

@@ -5,6 +5,7 @@ import io.ktor.server.netty.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.topbun.models.tours.Tours
 import ru.topbun.network.api.TelegramApi
 import ru.topbun.plugins.configureDatabases
 import ru.topbun.plugins.configurePosting
