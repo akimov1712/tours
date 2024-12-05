@@ -50,11 +50,12 @@ class TourScheduler(private val config: Config) {
         val response = toursApi.getTours(config)
         val organizedTours = response.organizedTours()
         val filteredTours = organizedTours.getFilteredTours(config).takeIf { it.isNotEmpty() } ?: run {
-            Tours.clearTours()  // TODO()  доработать очистку
+            clearTours()
             organizedTours
         }
-        filteredTours.firstOrNull()?.let { tours -> // TODO () почему firsOrNull
-            val tgMessage = tours.buildMessageToTelegramPost(config)
+        filteredTours.firstOrNull()?.let {
+            val tours = it.take(12)
+            val tgMessage = tours.take(12).buildMessageToTelegramPost(config)
             val vkMessage = tours.buildMessageToVkPost(config)
             val imageLink = tours.getPreviewImage().buildImageLink()
             TelegramApi().sendMessageWithPhoto(tgMessage, imageLink, config.tgId)
