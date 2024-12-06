@@ -48,11 +48,8 @@ class TourScheduler(private val config: Config) {
     private suspend fun executeTask() {
         val toursApi = ToursApi()
         val response = toursApi.getTours(config)
-        val organizedTours = response.organizedTours()
-        val filteredTours = organizedTours.getFilteredTours(config).takeIf { it.isNotEmpty() } ?: run {
-            clearTours()
-            organizedTours
-        }
+        val organizedTours = response.organizedTours(config)
+        val filteredTours = organizedTours.getFilteredTours(config).takeIf { it.isNotEmpty() } ?: return
         filteredTours.firstOrNull()?.let {
             val tours = it.take(12)
             val tgMessage = tours.take(12).buildMessageToTelegramPost(config)
@@ -60,7 +57,7 @@ class TourScheduler(private val config: Config) {
             val imageLink = tours.getPreviewImage().buildImageLink()
             TelegramApi().sendMessageWithPhoto(tgMessage, imageLink, config.tgId)
             VkApi().sendMessageWithPhoto(vkMessage, imageLink, config.vkId)
-            Tours.insertTourList(tours)
+            Tours.insertTourList(tours, config.title)
         }
     }
 }

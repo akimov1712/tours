@@ -11,13 +11,15 @@ import ru.topbun.models.tours.Tours.date
 fun List<List<TourDTO>>.getFilteredTours(config: Config): List<List<TourDTO>> =
     filter { group ->
         val delay = config.delayUniquePosts
-        val isNotSuspension = group.none { Tours.haveSuspension(it.tourid, delay) }
+        val isNotSuspension = group.filter {
+            !Tours.haveSuspension(it.tourid, delay, config.title)
+        }.isNotEmpty()
         val correspondsOperator = if (config.operators.isEmpty()) true else group.filter { config.operators.map { it.id }.contains(it.operatorcode.toString()) }.isNotEmpty()
         isNotSuspension && correspondsOperator
     }
 
-fun HottourResponse.organizedTours(): List<List<TourDTO>> =
-    hottours.tours.groupBy { it.countryname }.values.toList()
+fun HottourResponse.organizedTours(config: Config): List<List<TourDTO>> =
+    hottours.tours.filter { !Tours.haveSuspension(it.tourid, config.delayUniquePosts, config.title) }.groupBy { it.countryname }.values.toList()
 
 private fun List<TourDTO>.getNearTour(): TourDTO =
     minByOrNull { it.price } ?: throw NoSuchElementException("No tours available")

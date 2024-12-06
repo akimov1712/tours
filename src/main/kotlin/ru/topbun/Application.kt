@@ -5,6 +5,9 @@ import io.ktor.server.netty.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.vendors.SchemaMetadata
 import ru.topbun.models.tours.Tours
 import ru.topbun.network.api.TelegramApi
 import ru.topbun.plugins.configureDatabases
